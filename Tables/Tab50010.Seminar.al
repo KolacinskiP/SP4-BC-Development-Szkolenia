@@ -1,5 +1,8 @@
 Table 50010 Seminar
 {
+    DataCaptionFields = Code, Name;
+    LookupPageId = "Seminar List";
+
     fields
     {
         field(1; "Code"; Code[20])
@@ -9,6 +12,12 @@ Table 50010 Seminar
         field(2; Name; Text[50])
         {
             Caption = 'Name';
+
+            trigger OnValidate()
+            begin
+                if ("Search Name" <> UpperCase(Name)) then
+                    "Search Name" := Name;
+            end;
         }
         field(3; "Seminar Duration"; Decimal)
         {
@@ -42,6 +51,7 @@ Table 50010 Seminar
         }
     }
 
+
     keys
     {
         key(Key1; "Code")
@@ -49,4 +59,9 @@ Table 50010 Seminar
             Clustered = true;
         }
     }
+
+    trigger OnModify()
+    begin
+        "Last Date Modified" := WorkDate();
+    end;
 }

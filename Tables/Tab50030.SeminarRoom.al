@@ -1,6 +1,7 @@
 Table 50030 "Seminar Room"
 {
-
+    DataCaptionFields = Code, Name;
+    LookupPageId = "Seminar Room List";
     fields
     {
         field(1; "Code"; Code[20])
@@ -22,11 +23,19 @@ Table 50030 "Seminar Room"
         field(5; City; Text[30])
         {
             Caption = 'City';
+            Editable = false;
         }
         field(6; "Post Code"; Code[20])
         {
             Caption = 'Post Code';
             TableRelation = "Post Code";
+
+            trigger OnValidate()
+            var
+                DummyCounty: Text[30];
+            begin
+                PostCode.ValidatePostCode(City, "Post Code", DummyCounty, "Country/Region Code", (CurrFieldNo <> 0) and GuiAllowed());
+            end;
         }
         field(7; "Country/Region Code"; Code[10])
         {
@@ -64,5 +73,8 @@ Table 50030 "Seminar Room"
             Clustered = true;
         }
     }
+
+    var
+        PostCode: Record "Post Code";
 }
 

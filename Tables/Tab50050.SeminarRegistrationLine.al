@@ -27,6 +27,7 @@ Table 50050 "Seminar Registration Line"
             Caption = 'Participant Name';
             FieldClass = FlowField;
             CalcFormula = lookup("Contact".Name where("No." = field("Participant Contact No.")));
+            Editable = false;
         }
         field(6; "Register Date"; Date)
         {
@@ -88,4 +89,11 @@ Table 50050 "Seminar Registration Line"
             SumIndexFields = Amount;
         }
     }
+
+    // trigger OnInsert()
+    // var
+    //     SeminarRegistrationHeader: Record "Seminar Registration Header"
+    // begin
+
+    // end;
 }

@@ -81,7 +81,7 @@ Codeunit 50010 "Seminar Management"
                 SalesLine.Validate("No.", Sales."G/L Account No.");
 
                 //TODO: ustaw "ilość" w wierszu faktury na wartość 1
-                SalesLine.Quantity := 1;
+                SalesLine.Validate(Quantity, 1);
 
                 SalesLine.Validate("Unit Price", SeminarRegLine.Amount);
                 //TODO: wymuś przeliczenie wartości pola z "Nazwą uczestnika"
